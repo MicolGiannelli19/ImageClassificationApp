@@ -4,6 +4,8 @@ from fastapi.staticfiles import StaticFiles
 from mangum import Mangum
 import os
 
+# TODO: add a desctription of this to the readME
+
 #  note How everything in the code for somehting new is commented
 
 
