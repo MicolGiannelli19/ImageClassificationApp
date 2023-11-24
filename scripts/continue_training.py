@@ -37,5 +37,8 @@ if __name__ == "__main__":
         epoch_counter += epochs_per_iteration
 
         model.save("output", "model.h5")
+        #  this doesn't seem to be working for me beasue the model is exactly the same as before
 
         print(f"Total number of epochs this train session: {epoch_counter}")
+
+        # Maybe test the classify image fucntion form here and also try re draring the histogram evey time edit this code slightly to makes some checks

@@ -18,3 +18,13 @@ python scripts/train.py
 ```
 ### Classify an Image 
 
+
+
+## Frontend 
+
+1. Make sure you are in the frontend directory 
+   
+```shell 
+
+cd frontend 
+```
