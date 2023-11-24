@@ -10,8 +10,7 @@ Add your own readme to explain the project
 ### Train a model 
 
 To traina modle run 
-```
-shell 
+```shell 
 
 python scripts/train.py
 
@@ -27,4 +26,21 @@ python scripts/train.py
 ```shell 
 
 cd frontend 
+```
+2. To install the frontend dependencies
+
+```shell 
+npm install 
+```
+
+3. To run the development server
+```shell 
+npm run start 
+
+```
+
+4. To buiild the production files
+
+```shell 
+npm run build
 ```
