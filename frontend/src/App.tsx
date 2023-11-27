@@ -1,14 +1,13 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import Sum from "./Sum";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          <code>What is this code tab for </code> ciao ciao ciao
-        </p>
+        <p>Hello World</p>
+        <Sum></Sum>
       </header>
     </div>
   );
