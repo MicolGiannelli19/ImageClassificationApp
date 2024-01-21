@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+// understand what useRef does
 
 function Sum() {
   const [number_a, set_number_a] = useState(0);

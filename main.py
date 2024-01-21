@@ -2,15 +2,38 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from mangum import Mangum
+from pydantic import BaseModel
 import os
 
 # TODO: add a desctription of this to the readME
 
 #  note How everything in the code for somehting new is commented
 
-
 # Instantiate the app
 app = FastAPI()
+
+
+# defining the format for the input and outputs with these classes
+class SumInput(BaseModel):
+    a: int
+    b: int
+
+
+class SumOutput(BaseModel):
+    sum: int
+
+
+# define ping get example with a get method
+@app.get("/ping")
+def pong():
+    return "Pong!"
+
+
+# Sum two numbers together
+@app.post("/sum")
+def sum(input: SumInput):
+    return SumOutput(sum=input.a + input.b)
+
 
 # Server our react application at the root
 # this is like setting the urls in django
