@@ -2,69 +2,39 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from mangum import Mangum
-from pydantic import BaseModel
 import os
 
-# TODO: add a desctription of this to the readME
 
-#  note How everything in the code for somehting new is commented
+#  We instantiate the app
 
-# Instantiate the app
 app = FastAPI()
 
 
-# defining the format for the input and outputs with these classes
-class SumInput(BaseModel):
-    a: int
-    b: int
-
-
-class SumOutput(BaseModel):
-    sum: int
-
-
-# define ping get example with a get method
-@app.get("/ping")
-def pong():
-    return "Pong!"
-
-
-# Sum two numbers together
-@app.post("/sum")
-def sum(input: SumInput):
-    return SumOutput(sum=input.a + input.b)
-
-
-# Server our react application at the root
-# this is like setting the urls in django
+# We want to serve ourt react application at root
 app.mount(
     "/",
     StaticFiles(directory=os.path.join("frontend", "build"), html=True),
     name="build",
 )
 
-
-# CORS
-# this is something to manage persmissions for doing stuff
-# At some point we should only allow requests for specific IP adresses
+# setting up CORS (cross orgin rescource settings)
+# the allow [*] means that is allowing all of them (for now we are pretty much allowing everything just so we don't have to deal with this when working wiht the diffrent part of this repo)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permits requests from all origins.
-    # Allows cookies and credentials to be included in the request.
+    allow_orgins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all HTTP methods.
-    allow_headers=["*"],  # Allows all headers.
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-# Define the Lambda handler
+# Mangum
 handler = Mangum(app)
 
 
-# Prevent Lambda showing errors in CloudWatch by handling warmup requests correctly
+# This is to prevemt the lambda from showing errors in cloud watch
 def lambda_handler(event, context):
     if "source" in event and event["source"] == "aws.events":
-        print("This is a warm-ip invocation")
+        print("This is a warm up invocation")
         return {}
     else:
-        # otherwise we return the actual handler application which we defined with mangum
         return handler(event, context)
