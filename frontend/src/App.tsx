@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>Hello World</p>
+        <p>This is my Image Classification app</p>
         <Sum></Sum>
       </header>
     </div>

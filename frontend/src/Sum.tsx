@@ -1,19 +1,35 @@
+//   I don' know when I imported this
+// import { eventNames } from "process";
+import { error } from "console";
 import { useState, useRef } from "react";
-// understand what useRef does
 
 function Sum() {
   const [number_a, set_number_a] = useState(0);
   const [number_b, set_number_b] = useState(0);
 
-  //   I think there is a mistake in the code because null is not in round brackets
   const output = useRef<HTMLSpanElement>(null);
 
-  //   there is an issue with this output thing
+  const submit_sum_request = () => {
+    console.log(`Number a is ${number_a} and Number b is ${number_b} `);
 
-  // Note how functions are defined as variables
-  const submit_sum_request = () => {};
-  // I don't understand why this is being called before I press the button
-  console.log(`Number A is : ${number_a}, Number B`);
+    // using  a relative route
+    // note the labels we define here must match the ones from the main.py body
+    fetch("/sum", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ a: number_a, b: number_b }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (output.current !== null) {
+          output.current.innerHTML = data.sum;
+        }
+        console.log("Hi!!!");
+      })
+      .catch((error) => console.log("An error as occured"));
+    console.log("Hello");
+  };
+
   return (
     <div>
       <input
@@ -27,12 +43,15 @@ function Sum() {
         value={number_b}
         onChange={(event) => set_number_b(Number(event.target.value))}
       ></input>
+
       <br />
+
       <button onClick={submit_sum_request}>Add!</button>
-      <p>
-        The result is: <span ref={output}>0</span>
-      </p>
       <br />
+
+      <p>
+        The result is: <span ref={output}></span>
+      </p>
     </div>
   );
 }
