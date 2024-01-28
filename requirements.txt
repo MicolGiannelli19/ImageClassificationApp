@@ -3,3 +3,6 @@ matplotlib
 fastapi
 uvicorn
 mangum
+pillow
+python-multipart
+numpy==1.23.1

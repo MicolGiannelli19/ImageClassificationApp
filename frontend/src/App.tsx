@@ -6,9 +6,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>This is my Image Classification app</p>
         <Sum></Sum>
+        <p>This is my Image Classification app</p>
       </header>
+      Learn React
     </div>
   );
 }

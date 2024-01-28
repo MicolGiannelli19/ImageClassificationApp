@@ -44,3 +44,5 @@ npm run start
 ```shell 
 npm run build
 ```
+
+TODO : you have to fix some issues you are having with the venv find out how to properly delete it and create it again 
