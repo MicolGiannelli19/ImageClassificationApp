@@ -9,7 +9,7 @@ from pydantic import BaseModel
 # from tensorflow.keras import models
 import numpy as np
 import os
-import tensorflow as tf
+import tensorflow as tf  # this is not currently being used
 
 
 # TODO: defiene a function that accepts an image and r
@@ -52,6 +52,9 @@ def dimensions(file: UploadFile = File(...)):
     # would be very intresting to find out what this format is
     print("the function is being called")
     image = Image.open(file.file)
+
+    # convert the image to an array
+    # TODO: learn more about this
     image_array = np.array(image)
 
     width = image_array.shape[1]
